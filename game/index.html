@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SKYRING — Coral Chain Ring-Run</title>
+<link rel="icon" href="data:,">
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0a1428; font-family: "Segoe UI", system-ui, sans-serif; }
+  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  #hud { position: fixed; inset: 0; pointer-events: none; color: #fff; }
+  .hud-box { background: rgba(8, 18, 38, 0.62); border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 6px 12px; text-align: center; }
+  .lbl { font-size: 11px; letter-spacing: 2px; color: #ffd23e; font-weight: 700; }
+  .big { font-size: 30px; font-weight: 800; line-height: 1.1; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+  .big.small { font-size: 22px; }
+  .unit { font-size: 13px; font-weight: 600; color: #cfe4ff; }
+  #hud-top { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+  #hud-objective { position: absolute; top: 84px; left: 50%; transform: translateX(-50%); background: rgba(8,18,38,0.72); border: 1px solid #ffd23e; border-radius: 6px; padding: 6px 16px; font-size: 17px; font-weight: 700; letter-spacing: 1px; white-space: nowrap; }
+  #hud-left { position: absolute; left: 14px; top: 110px; display: flex; flex-direction: column; gap: 10px; width: 170px; }
+  #hud-message { position: absolute; top: 150px; left: 50%; transform: translateX(-50%); font-size: 24px; font-weight: 800; color: #ffd23e; text-shadow: 0 2px 6px rgba(0,0,0,0.8); transition: opacity 0.3s; white-space: nowrap; }
+  #hud-bottom { position: absolute; left: 14px; right: 14px; bottom: 12px; display: flex; align-items: flex-end; gap: 14px; }
+  #horizon { border: 1px solid rgba(255,255,255,0.4); border-radius: 8px; background: rgba(8,18,38,0.6); }
+  #hud-throttle { background: rgba(8,18,38,0.62); border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 8px 12px; width: 170px; text-align: center; }
+  #thr-bar { height: 12px; background: rgba(255,255,255,0.2); border-radius: 6px; margin: 6px 0 4px; overflow: hidden; }
+  #thr-fill { height: 100%; width: 65%; background: #2aff5a; border-radius: 6px; }
+  #v-thr { font-size: 20px; font-weight: 800; }
+  #hud-controls { margin-left: auto; background: rgba(8,18,38,0.62); border: 1px solid rgba(255,255,255,0.35); border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; }
+  #overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+  #overlay:empty { display: none; }
+  .panel { pointer-events: none; background: rgba(6, 14, 32, 0.82); border: 2px solid #ffd23e; border-radius: 14px; padding: 28px 40px; max-width: 640px; text-align: center; }
+  .panel h1 { margin: 0; font-size: 56px; letter-spacing: 6px; color: #ffd23e; }
+  .panel h2 { margin: 4px 0 14px; font-size: 20px; letter-spacing: 3px; color: #fff; }
+  .panel p { font-size: 16px; line-height: 1.5; color: #dfe9ff; margin: 10px 0; }
+  .panel .keys { color: #9fc3ff; font-weight: 600; }
+  .panel .go { color: #2aff5a; font-weight: 800; font-size: 18px; letter-spacing: 1px; animation: blink 1.2s infinite; }
+  .panel.win { border-color: #2aff5a; }
+  .panel.win h1 { color: #2aff5a; }
+  .panel.crash { border-color: #ff5a4a; }
+  .panel.crash h1 { color: #ff5a4a; }
+  .panel .final { font-size: 20px; }
+  .panel .final b { color: #ffd23e; font-size: 26px; }
+  @keyframes blink { 50% { opacity: 0.45; } }
+  #status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.min.js" } }
+</script>
+</head>
+<body>
+<canvas id="game" aria-label="SKYRING: fly the Kestrel through 12 gold rings over the Coral Chain, then land on the Gull Island runway"></canvas>
+<div id="hud"></div>
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
