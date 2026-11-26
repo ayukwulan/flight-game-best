@@ -1,0 +1,1 @@
+{"name":"skyring-coral-chain","private":true,"type":"module","scripts":{"serve":"node serve.ts","capture":"node capture.mjs","test":"node playtest.mjs","package":"node main.ts"}}
